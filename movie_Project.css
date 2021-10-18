@@ -17,3 +17,8 @@
     left: 240px;
     z-index: 100;
 }
+
+.poster {
+    width: 200px;
+    height: 200px
+}
