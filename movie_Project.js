@@ -1,5 +1,5 @@
 "use strict"
-
+const movieAPI = 'https://jazzy-believed-foxglove.glitch.me/movies';
 
 function getMovies() {
     return fetch("https://jazzy-believed-foxglove.glitch.me/movies").then((response) => response.json());//response.json() returns a promise
@@ -20,7 +20,7 @@ $(document).ready(function () {
     getMovies().then(movies => {
         console.log(movies);
         movies.forEach(function (movie) {
-            console.log(movie)
+            // console.log(movie)
             $("#moviesContainer").append("<h1>" + movie.title + "</h1>" + "<h4>" + "<em>" + "Directed by: " + movie.director + "</em>" + "</h4>" + "${movie.poster}" + "<br>" + "Year released: " + movie.year + "<br>" + "Rating: " + movie.rating + " stars" + "<br>" + movie.genre + "<br>" + "<p>" + "<strong>" + movie.plot + "</strong>" + "</p>" + "<hr>")
 
             // 	$(“.card-body”).append(`<div class=‘movieTitle m-2 text-center card-width’ id=‘${movie.id}’>
@@ -51,7 +51,8 @@ $(document).ready(function () {
 
     //Add a Movie//
 
-    function addMovie (movie) {
+
+    function addMovie(movie) {
         let options = {
             method: 'POST',
             headers: {
@@ -59,12 +60,32 @@ $(document).ready(function () {
             },
             body: JSON.stringify(movie)//convert the JS object into a JSON string before sending it up to the server.
         }
-        return fetch(`${getMovies}`, options)
+        return fetch(`${movieAPI}`, options)
             .then((response) => response.json())
+
     }
 
-    console.log(addMovie);
+
+    const newTitle = document.querySelector('#movie-title');
+    const newRating = document.querySelector('#movie-rating');
+    const addMovieButton = document.querySelector('#add-movie');
+
+    addMovieButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        const addedTitle = newTitle.value;
+        const addedRating = newRating.value;
+        const addedMovie = {
+            title: addedTitle,
+            rating: addedRating
+        };
+
+        // console.log(addedMovie);
 
 ////////////////GRAVE YARD////////////////////////
+        addMovie(addedMovie).then((NEWmovie)=>console.log(NEWmovie));
+
+    })
 
 })
+
+
