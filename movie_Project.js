@@ -51,16 +51,19 @@ $(document).ready(function () {
 
     //Add a Movie//
 
+    function addMovie (movie) {
+        let options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(movie)//convert the JS object into a JSON string before sending it up to the server.
+        }
+        return fetch(`${getMovies}`, options)
+            .then((response) => response.json())
+    }
 
-    const addMovie = {title: 'title', body: 'Are a fun way to use JS!'};
-    const url = 'https://jazzy-believed-foxglove.glitch.me/movies';
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(addMovie),
-    };
+    console.log(addMovie);
 
 ////////////////GRAVE YARD////////////////////////
 
