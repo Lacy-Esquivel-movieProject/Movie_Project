@@ -51,7 +51,6 @@ $(document).ready(function () {
 
     //Add a Movie//
 
-
     function addMovie(movie) {
         let options = {
             method: 'POST',
@@ -67,25 +66,44 @@ $(document).ready(function () {
 
 
     const newTitle = document.querySelector('#movie-title');
+    const newGenre = document.querySelector('#movie-genre');
     const newRating = document.querySelector('#movie-rating');
     const addMovieButton = document.querySelector('#add-movie');
 
     addMovieButton.addEventListener('click', function (event) {
         event.preventDefault();
         const addedTitle = newTitle.value;
+        const addedGenre = newGenre.value;
         const addedRating = newRating.value;
         const addedMovie = {
             title: addedTitle,
+            genre: addedGenre,
             rating: addedRating
         };
 
         // console.log(addedMovie);
-
-////////////////GRAVE YARD////////////////////////
-        addMovie(addedMovie).then((NEWmovie)=>console.log(NEWmovie));
-
+        addMovie(addedMovie).then((NEWmovie) => console.log(NEWmovie));
+        Refresh;
     })
+
+    //Delete Movie//
+    // function deleteMovie(title) {
+    //     let options = {
+    //         method: 'DELETE',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(title)//convert the JS object into a JSON string before sending it up to the server.
+    //     }
+    //     return fetch(`${movieAPI}`, options)
+    //         .then((response) => response.json())
+    //
+    //
+    // }
+    //
+    // console.log(deleteMovie("Spider-Man"));
 
 })
 
+////////////////GRAVE YARD////////////////////////
 
