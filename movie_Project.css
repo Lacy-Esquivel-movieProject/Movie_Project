@@ -4,9 +4,15 @@
     margin-bottom: 0;
 }
 
-/*html {*/
-/*    background-color: black;*/
-/*}*/
-/*#moviesContainer {*/
-/*    margin-top: 0;*/
-/*}*/
+.newMovie{
+    display: flex;
+    padding-top: 1em;
+    margin-top: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+#moviesContainer{
+    margin: 3em;
+    word-wrap: break-word;
+}
