@@ -2,108 +2,151 @@
 const movieAPI = 'https://jazzy-believed-foxglove.glitch.me/movies';
 
 function getMovies() {
-    return fetch("https://jazzy-believed-foxglove.glitch.me/movies").then((response) => response.json());//response.json() returns a promise
+	return fetch("https://jazzy-believed-foxglove.glitch.me/movies").then((response) => response.json());//response.json() returns a promise
 }
-
-let stars = new Image()
-
 
 $(document).ready(function () {
 
-    $('#moviesContainer').hide(function () {
-        setTimeout(function () {
-            // noinspection JSUnresolvedFunction
-            $('#moviesContainer').show()
-        }, 750);
-    })
+	$('#moviesContainer').hide(function () {
+		setTimeout(function () {
+			// noinspection JSUnresolvedFunction
+			$('#moviesContainer').show()
+		}, 750);
+	})
 
-    getMovies().then(movies => {
-        console.log(movies);
-        movies.forEach(function (movie) {
-            // console.log(movie)
-            $("#moviesContainer").append("<h1>" + movie.title + "</h1>" + "<h4>" + "<em>" + "Directed by: " + movie.director + "</em>" + "</h4>" + "${movie.poster}" + "<br>" + "Year released: " + movie.year + "<br>" + "Rating: " + movie.rating + " stars" + "<br>" + movie.genre + "<br>" + "<p>" + "<strong>" + movie.plot + "</strong>" + "</p>" + "<hr>")
+	let results = [];
 
-            // 	$(“.card-body”).append(`<div class=‘movieTitle m-2 text-center card-width’ id=‘${movie.id}’>
-            //                         <div class=“card-body text-wrap”>
-            //                         <h5>${movie.title}</h5>
-            //                         <p class=“card-text“>Rating: ${movie.rating}</p>
-            //                         <p class=“card-text”>Genre: ${movie.genre}</p>
-            //                         <button type=“button” class=“delete-btn btn btn-danger”>Delete</button></div></div>`)
-        })
+	function renderMovie() {
+		getMovies().then(movies => {
+			results = movies
+			console.log(movies);
+			movies.forEach(function (movie) {
+				// console.log(movie)
+				$("#moviesContainer").append("<h1>" + movie.title + "</h1>" + "<h4>" + "<em>" + "Directed by: " + movie.director + "</em>" + "</h4>" + "${movie.poster}" + "<br>" + "Year released: " + movie.year + "<br>" + "Rating: " + movie.rating + " stars" + "<br>" + movie.genre + "<br>" + "<p>" + "<strong>" + movie.plot + "</strong>" + "</p>" + "<br>" + "<hr>")
+			})
 
+		});
+	}
 
-    });
-
-
-    $("#refresh").click(function () {
-        location.reload()
-    })
-
-
-    ///LOADING SCREEN///////
-    $('#load').show(function () {
-        setTimeout(function () {
-            $('#load').hide()
-        }, 2000);
+	renderMovie()
+	///LOADING SCREEN///////
+	$('#load').show(function () {
+		setTimeout(function () {
+			$('#load').hide()
+		}, 2000);
 
 
-    })
+	})
 
-    //Add a Movie//
+	//Add a Movie//
 
-    function addMovie(movie) {
-        let options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(movie)//convert the JS object into a JSON string before sending it up to the server.
-        }
-        return fetch(`${movieAPI}`, options)
-            .then((response) => response.json())
+	// function addMovie(movie) {
+	// 	let options = {
+	// 		method: 'POST',
+	// 		headers: {
+	// 			'Content-Type': 'application/json',
+	// 		},
+	// 		body: JSON.stringify(movie)//convert the JS object into a JSON string before sending it up to the server.
+	// 	}
+	// 	return fetch(`${movieAPI}`, options)
+	// 		.then((response) => response.json())
+	//
+	// }
+	//
+	//
+	// const newTitle = document.querySelector('#movie-title');
+	// const newGenre = document.querySelector('#movie-genre');
+	// const newRating = document.querySelector('#movie-rating');
+	// const addMovieButton = document.querySelector('#add-movie');
+	//
+	//
+	// addMovieButton.addEventListener('click', function (event) {
+	// 	event.preventDefault();
+	// 	const addedTitle = newTitle.value;
+	// 	const addedGenre = newGenre.value;
+	// 	const addedRating = newRating.value;
+	// 	const addedMovie = {
+	// 		title: addedTitle,
+	// 		genre: addedGenre,
+	// 		rating: addedRating
+	// 	};
+	// 	addMovie(addedMovie).then((NEWmovie) => console.log(NEWmovie)).then(movie => renderMovie());
+	// })
 
-    }
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EDIT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-    const newTitle = document.querySelector('#movie-title');
-    const newGenre = document.querySelector('#movie-genre');
-    const newRating = document.querySelector('#movie-rating');
-    const addMovieButton = document.querySelector('#add-movie');
+	function editMovie(movie) {
+		let options = {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(movie)//convert the JS object into a JSON string before sending it up to the server.
+		}
+		return fetch(`${movieAPI}`, options)
+			.then((response) => response.json())
+	}
 
-    addMovieButton.addEventListener('click', function (event) {
-        event.preventDefault();
-        const addedTitle = newTitle.value;
-        const addedGenre = newGenre.value;
-        const addedRating = newRating.value;
-        const addedMovie = {
-            title: addedTitle,
-            genre: addedGenre,
-            rating: addedRating
-        };
+	const editTitle = document.querySelector('#edit-title');
+	const editGenre = document.querySelector('#edit-genre');
+	const editRating = document.querySelector('#edit-rating');
+	const editMovieButton = document.querySelector('#edit-movie');
 
-        // console.log(addedMovie);
-        addMovie(addedMovie).then((NEWmovie) => console.log(NEWmovie));
-        Refresh;
-    })
 
-    //Delete Movie//
-    // function deleteMovie(title) {
-    //     let options = {
-    //         method: 'DELETE',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify(title)//convert the JS object into a JSON string before sending it up to the server.
-    //     }
-    //     return fetch(`${movieAPI}`, options)
-    //         .then((response) => response.json())
-    //
-    //
-    // }
-    //
-    // console.log(deleteMovie("Spider-Man"));
+	editMovieButton.addEventListener(`click`, function (event) {
+		event.preventDefault();
+		const editTitle = editTitle.value;
+		const editGenre = editGenre.value;
+		const editRating = editRating.value;
+		const editedMovie = {
+			title: editTitle,
+			genre: editGenre,
+			rating: editRating
+		};
+		editMovie(editedMovie).then((Editedmovie) => console.log(Editedmovie)).then(movie => renderMovie());
+		// editMovie(editedMovie).then((data) => console.log(data));
+	})
 
+
+
+
+/////////////////////////////DELETE MOVIE//////////////////////////////////
+
+	function deleteMovie(movie) {
+		console.log(movie);
+		let options = {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(movie)//convert the JS object into a JSON string before sending it up to the server.
+		}
+		return fetch(`${movieAPI}/${movie.id}`, options)
+			.then((response) => response.json())
+	}
+	const deleteMovieButton = document.querySelector('#delete-movie');
+
+	const deleteTitle = document.querySelector('#movie-title');
+	const deleteGenre = document.querySelector('#movie-genre');
+	const deleteRating = document.querySelector('#movie-rating');
+
+	deleteMovieButton.addEventListener('click', function (event) {
+		event.preventDefault();
+
+		const deletedTitle = deleteTitle.value;
+		// const deletedGenre = deleteGenre.value;
+		// const deletedRating = deleteRating.value;
+
+
+	const deletedMovie = results.find(function (movie){
+		return movie.title === deletedTitle
+	})
+	// 	title: deletedTitle,
+	// 	genre: deletedGenre,
+	// 	rating: deletedRating
+	// };
+	deleteMovie(deletedMovie).then((DELETEmovie) => console.log(DELETEmovie)).then(movie => renderMovie());
 })
-
-////////////////GRAVE YARD////////////////////////
-
+})
