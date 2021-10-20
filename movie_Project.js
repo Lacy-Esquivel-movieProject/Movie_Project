@@ -38,40 +38,40 @@ $(document).ready(function () {
 
 	})
 
-	//Add a Movie//
+	// Add a Movie//
 
-	// function addMovie(movie) {
-	// 	let options = {
-	// 		method: 'POST',
-	// 		headers: {
-	// 			'Content-Type': 'application/json',
-	// 		},
-	// 		body: JSON.stringify(movie)//convert the JS object into a JSON string before sending it up to the server.
-	// 	}
-	// 	return fetch(`${movieAPI}`, options)
-	// 		.then((response) => response.json())
-	//
-	// }
-	//
-	//
-	// const newTitle = document.querySelector('#movie-title');
-	// const newGenre = document.querySelector('#movie-genre');
-	// const newRating = document.querySelector('#movie-rating');
-	// const addMovieButton = document.querySelector('#add-movie');
-	//
-	//
-	// addMovieButton.addEventListener('click', function (event) {
-	// 	event.preventDefault();
-	// 	const addedTitle = newTitle.value;
-	// 	const addedGenre = newGenre.value;
-	// 	const addedRating = newRating.value;
-	// 	const addedMovie = {
-	// 		title: addedTitle,
-	// 		genre: addedGenre,
-	// 		rating: addedRating
-	// 	};
-	// 	addMovie(addedMovie).then((NEWmovie) => console.log(NEWmovie)).then(movie => renderMovie());
-	// })
+	function addMovie(movie) {
+		let options = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(movie)//convert the JS object into a JSON string before sending it up to the server.
+		}
+		return fetch(`${movieAPI}`, options)
+			.then((response) => response.json())
+
+	}
+
+
+	const newTitle = document.querySelector('#movie-title');
+	const newGenre = document.querySelector('#movie-genre');
+	const newRating = document.querySelector('#movie-rating');
+	const addMovieButton = document.querySelector('#add-movie');
+
+
+	addMovieButton.addEventListener('click', function (event) {
+		event.preventDefault();
+		const addedTitle = newTitle.value;
+		const addedGenre = newGenre.value;
+		const addedRating = newRating.value;
+		const addedMovie = {
+			title: addedTitle,
+			genre: addedGenre,
+			rating: addedRating
+		};
+		addMovie(addedMovie).then((NEWmovie) => console.log(NEWmovie)).then(movie => renderMovie());
+	})
 
 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EDIT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -110,8 +110,6 @@ $(document).ready(function () {
 	})
 
 
-
-
 /////////////////////////////DELETE MOVIE//////////////////////////////////
 
 	function deleteMovie(movie) {
@@ -126,27 +124,22 @@ $(document).ready(function () {
 		return fetch(`${movieAPI}/${movie.id}`, options)
 			.then((response) => response.json())
 	}
+
 	const deleteMovieButton = document.querySelector('#delete-movie');
 
 	const deleteTitle = document.querySelector('#movie-title');
-	const deleteGenre = document.querySelector('#movie-genre');
-	const deleteRating = document.querySelector('#movie-rating');
+
 
 	deleteMovieButton.addEventListener('click', function (event) {
 		event.preventDefault();
 
 		const deletedTitle = deleteTitle.value;
-		// const deletedGenre = deleteGenre.value;
-		// const deletedRating = deleteRating.value;
 
 
-	const deletedMovie = results.find(function (movie){
-		return movie.title === deletedTitle
+		const deletedMovie = results.find(function (movie) {
+			return movie.title === deletedTitle
+		})
+
+		deleteMovie(deletedMovie).then((DELETEmovie) => console.log(DELETEmovie)).then(movie => renderMovie());
 	})
-	// 	title: deletedTitle,
-	// 	genre: deletedGenre,
-	// 	rating: deletedRating
-	// };
-	deleteMovie(deletedMovie).then((DELETEmovie) => console.log(DELETEmovie)).then(movie => renderMovie());
-})
 })
