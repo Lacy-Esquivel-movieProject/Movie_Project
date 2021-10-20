@@ -88,9 +88,9 @@ $(document).ready(function () {
 		return fetch(`${movieAPI}/${movie.id}`, options)
 			.then((response) => response.json())
 	}
+
 	const editMovieButton = document.querySelector('#edit-movie');
 	const editTitle = document.querySelector('#edit-title');
-
 
 
 	editMovieButton.addEventListener(`click`, function (event) {
@@ -103,7 +103,6 @@ $(document).ready(function () {
 
 		editMovie(editedMovie).then((EDITmovie) => console.log(EDITmovie)).then(movie => renderMovie());
 	})
-
 
 
 /////////////////////////////DELETE MOVIE//////////////////////////////////
