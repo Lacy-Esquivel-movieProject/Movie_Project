@@ -79,35 +79,31 @@ $(document).ready(function () {
 
 	function editMovie(movie) {
 		let options = {
-			method: 'PUT',
+			method: 'PATCH',
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(movie)//convert the JS object into a JSON string before sending it up to the server.
 		}
-		return fetch(`${movieAPI}`, options)
+		return fetch(`${movieAPI}/${movie.id}`, options)
 			.then((response) => response.json())
 	}
-
-	const editTitle = document.querySelector('#edit-title');
-	const editGenre = document.querySelector('#edit-genre');
-	const editRating = document.querySelector('#edit-rating');
 	const editMovieButton = document.querySelector('#edit-movie');
+	const editTitle = document.querySelector('#edit-title');
+
 
 
 	editMovieButton.addEventListener(`click`, function (event) {
 		event.preventDefault();
 		const editTitle = editTitle.value;
-		const editGenre = editGenre.value;
-		const editRating = editRating.value;
-		const editedMovie = {
-			title: editTitle,
-			genre: editGenre,
-			rating: editRating
-		};
-		editMovie(editedMovie).then((Editedmovie) => console.log(Editedmovie)).then(movie => renderMovie());
-		// editMovie(editedMovie).then((data) => console.log(data));
+
+		const editedMovie = results.find(function (movie) {
+			return movie.title === editedTitle
+		})
+
+		editMovie(editedMovie).then((EDITmovie) => console.log(EDITmovie)).then(movie => renderMovie());
 	})
+
 
 
 /////////////////////////////DELETE MOVIE//////////////////////////////////
