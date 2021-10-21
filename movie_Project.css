@@ -1,8 +1,31 @@
-#load img {
-	height: 100vh;
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap');
+
+#loading {
+	position: fixed;
+	display: flex;
 	width: 100%;
-	margin-bottom: 0;
+	height: 100%;
+	top: 0;
+	left: 0;
+	text-align: center;
+	opacity: 0.7;
+	background-color: #fff;
+
 }
+
+#loading-image {
+	position: absolute;
+	top: 100px;
+	left: 240px;
+	z-index: 100;
+}
+
+
+/*#load img {*/
+/*	height: 100vh;*/
+/*	width: 100%;*/
+/*	margin-bottom: 0;*/
+/*}*/
 
 .newMovie {
 	display: flex;
@@ -10,9 +33,118 @@
 	margin-top: 0;
 	justify-content: center;
 	align-items: center;
+	margin-bottom: 15px;
 }
 
 #moviesContainer {
 	margin: 3em;
 	word-wrap: break-word;
+}
+
+.display-3 {
+	margin-top: 100px;
+	display: flex;
+	align-content: center;
+	justify-content: center;
+	font-family: 'IM Fell English SC', serif;
+}
+
+.btn-2 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: 'IM Fell English SC', serif;
+}
+
+#movie-title {
+	float: left;
+	margin-right: 10px;
+	font-family: 'IM Fell English SC', serif;
+	font-weight: bold;
+}
+
+#movie-genre {
+	float: left;
+	font-weight: bold;
+	color: #009;
+	margin-bottom: 5px;
+	font-family: 'IM Fell English SC', serif;
+	font-style: italic;
+}
+
+#movie-rating {
+	margin-left: 30px;
+	font-style: italic;
+	color: #000000;
+	font-weight: bold;
+	font-family: 'IM Fell English SC', serif;
+}
+
+.editMovie {
+	display: flex;
+	padding-top: 1em;
+	margin-top: 0;
+	margin-bottom: 15px;
+	justify-content: center;
+	align-items: center;
+	font-family: 'IM Fell English SC', serif;
+	font-weight: bold;
+	font-style: italic;
+}
+
+
+#edit-title {
+	float: left;
+	margin-right: 10px;
+	font-family: 'IM Fell English SC', serif;
+	font-weight: bold;
+	font-style: italic;
+}
+
+#edit-genre {
+	float: left;
+	font-weight: bold;
+	font-style: italic;
+	color: #009;
+	margin-bottom: 5px;
+	font-family: 'IM Fell English SC', serif;
+}
+
+#edit-rating {
+	margin-left: 30px;
+	font-style: italic;
+	color: #000000;
+	font-family: 'IM Fell English SC', serif;
+	font-weight: bold;
+}
+
+#add-movie {
+	display: flex;
+	margin: 0 4px;
+}
+
+#edit-movie {
+	display: flex;
+	margin: 0 4px;
+}
+
+body {
+	background-image: url("img/1000_F_95482912_6Lmqd8lBKbQ9g7cvs8J0YgTt7rplMYkI.jpeg");
+	background-repeat: no-repeat;
+	background-size: auto;
+	background-attachment: fixed;
+}
+
+#moviesContainer {
+	color: white;
+	font-weight: bold;
+	font-size: 1em;
+}
+
+.jumbotron {
+	background-image: url("img/8f0bd18145d8034cbf88a304e43e2758.jpeg");
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-position: center;
+
 }
