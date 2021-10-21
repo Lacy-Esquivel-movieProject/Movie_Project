@@ -38,6 +38,12 @@ $(document).ready(function () {
 
 	})
 
+	// $(window).show(function() {
+	// 	setTimeout(function () {
+	// 		$('#loading').hide()}, 2000)
+	//
+	// });
+
 	// Add a Movie//
 
 	function addMovie(movie) {
